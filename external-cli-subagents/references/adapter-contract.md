@@ -9,6 +9,7 @@ Adapter skill name: `<vendor>-cli-subagent`
 Frontmatter description must say when to use the adapter and must include:
 
 - The local CLI command name.
+- Strength Profile / 擅长任务描述 for main-agent child selection.
 - Capability-fit signals for routing tasks to this adapter.
 - Manual authentication requirement.
 - That API calls and credential automation are out of scope.
@@ -16,15 +17,33 @@ Frontmatter description must say when to use the adapter and must include:
 ## Required Sections
 
 1. Overview
-2. Capability Fit
-3. Manual Readiness
-4. Command Templates
-5. Handoff Prompt
-6. Concurrency and Isolation
-7. Output Contract
-8. Monitoring and Logs
-9. Failure Handling
-10. Extension Notes
+2. Strength Profile / 擅长任务描述
+3. Capability Fit
+4. Manual Readiness
+5. Command Templates
+6. Handoff Prompt
+7. Concurrency and Isolation
+8. Output Contract
+9. Monitoring and Logs
+10. Failure Handling
+11. Extension Notes
+
+## Strength Profile / 擅长任务描述
+
+Each adapter must include a short, main-agent-facing strength profile before detailed capability notes. The main agent uses this section to compare child agents quickly.
+
+Template:
+
+```markdown
+## Strength Profile / 擅长任务描述
+
+- Best at: <task families this CLI/model is especially suitable for>
+- Avoid for: <task families that should stay with the main agent or another adapter>
+- Validate with: <required evidence before accepting work>
+- Routing note: <one-sentence comparative guidance>
+```
+
+This section should be brief enough to scan during adapter selection. Detailed nuance belongs in Capability Fit.
 
 ## Capability Fit
 
@@ -54,6 +73,7 @@ Adapters accept this conceptual input from `external-cli-subagents`:
 | `verification` | Commands or manual checks the child should attempt |
 | `output_log` | Path where output should be saved when practical |
 | `concurrency` | Whether this child may run in parallel and what isolation is required |
+| `strength_profile` | Short reason this adapter fits or does not fit the selected task |
 | `capability_fit` | Why this adapter is suitable for the selected task, if relevant |
 
 ## Handoff Template Requirements
@@ -103,4 +123,5 @@ The main agent still verifies independently.
 1. Create a sibling skill folder.
 2. Follow the required sections above.
 3. Add the adapter to `external-cli-subagents` under Available Adapters.
-4. Validate both skill folders.
+4. Add the adapter's short strength profile to any user-facing adapter list if useful.
+5. Validate both skill folders.

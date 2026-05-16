@@ -1,13 +1,13 @@
 ---
 name: external-cli-subagents
-description: Use when Codex needs to expose an already-installed external coding CLI, such as Gemini CLI, as a manually authenticated external subagent after another delegation workflow has selected a task. Use for vendor adapter selection, capability-fit notes, handoff execution, result intake, verification, merge, retry, discard, or adding new CLI adapter skills. Do not use for deciding whether to delegate or for API-based automation.
+description: Use when Codex needs to expose an already-installed external coding CLI, such as Gemini CLI, as a manually authenticated external subagent after another delegation workflow has selected a task. Use for vendor adapter selection, strength-profile notes, capability-fit notes, handoff execution, result intake, verification, merge, retry, discard, or adding new CLI adapter skills. Do not use for deciding whether to delegate or for API-based automation.
 ---
 
 # External CLI Subagents
 
 ## Overview
 
-Expose external coding CLIs as controlled subagents without automating credentials or replacing the main agent's judgment. This skill is the vendor-neutral entrypoint; vendor-specific commands and capability-fit notes live in separate adapter skills such as `gemini-cli-subagent`.
+Expose external coding CLIs as controlled subagents without automating credentials or replacing the main agent's judgment. This skill is the vendor-neutral entrypoint; vendor-specific commands, strength profiles, and capability-fit notes live in separate adapter skills such as `gemini-cli-subagent`.
 
 ## Scope Boundary
 
@@ -28,6 +28,16 @@ Adapter skills implement the same contract and can be installed independently.
 | Vendor | Skill | Status | Use for |
 | --- | --- | --- | --- |
 | Gemini CLI | `gemini-cli-subagent` | implemented | Bounded coding, review, analysis, frontend/UI-oriented implementation, and fix tasks through the local `gemini` command |
+
+## Strength Profiles
+
+Each adapter must include a **Strength Profile / 擅长任务描述** section for the main agent to scan before choosing a child. This is routing input, not automatic routing.
+
+Minimum fields:
+
+- Best at: concise description of task types this child is especially suitable for.
+- Avoid for: task types that should stay with the main agent or another adapter.
+- Validate with: evidence the main agent must require before accepting work.
 
 When the user asks to install or set up external CLI subagent support, show the adapter list and ask which CLI adapter skills to install. Multiple adapters may be selected. Current selection choices:
 
@@ -55,7 +65,7 @@ If this collection is later packaged in a remote skills repository, use the repo
 
 1. Confirm delegation has already been selected by another workflow. If the user is still asking whether to delegate, use the normal planning/subagent skills first.
 2. Select an adapter skill by vendor. For Gemini, use `gemini-cli-subagent`.
-   - Check the adapter's capability-fit notes when the task can benefit from model/tool complementarity, such as routing backend architecture to one agent and frontend polish to another.
+   - Check the adapter's Strength Profile / 擅长任务描述 when the task can benefit from model/tool complementarity, such as routing backend architecture to one agent and frontend polish to another.
    - Treat fit notes as routing input, not as authority. The main agent remains responsible for the assignment.
 3. Require manual CLI readiness:
    - The CLI executable is installed and on `PATH`.
@@ -129,6 +139,7 @@ Return:
 Each vendor adapter skill must provide:
 
 - Trigger conditions and non-goals.
+- Strength Profile / 擅长任务描述: short main-agent-facing summary for child selection.
 - Capability-fit notes: best-fit tasks, weak-fit tasks, and required validation signals.
 - Manual readiness checks.
 - Command templates for foreground and, when safe, background execution.

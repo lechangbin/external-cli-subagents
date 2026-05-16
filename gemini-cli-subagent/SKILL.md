@@ -9,6 +9,13 @@ description: Use when external-cli-subagents has selected the local Gemini CLI a
 
 Run a manually authenticated local `gemini` CLI as an external child agent under the `external-cli-subagents` adapter contract. The main agent remains responsible for task selection, independent verification, and merge or discard decisions.
 
+## Strength Profile / 擅长任务描述
+
+- Best at: frontend/UI implementation, visual or aesthetic review, copy polish, broad code reading, second-opinion review, and bounded mechanical fixes with clear acceptance checks.
+- Avoid for: backend architecture decisions, cross-cutting refactors, security-sensitive work, credential handling, production changes, or tasks requiring project-specific judgment Gemini cannot inspect.
+- Validate with: unit tests, build/lint checks, screenshots or browser verification for frontend work, and main-agent diff review before accepting file changes.
+- Routing note: use Gemini CLI as a complementary child when visual/frontend judgment or a broad second opinion is useful; keep architecture and final integration judgment with the main agent.
+
 ## Capability Fit
 
 Use Gemini CLI when the selected task benefits from a complementary external perspective, especially:

@@ -15,11 +15,13 @@ Beyond cost control, this package supports capability-complement routing: assign
 | `external-cli-subagents` | Shared workflow for selecting a CLI adapter, preparing isolated work, handing off a bounded task, and triaging results |
 | `gemini-cli-subagent` | Gemini CLI adapter with manual readiness checks, command templates, concurrency notes, and failure handling |
 
+Each adapter includes a `Strength Profile / 擅长任务描述` section so the main agent can compare child agents before assigning work.
+
 ## Use Cases
 
 - Reduce high-end main-agent context use for large, independent, verifiable tasks.
 - Let a lower-cost main agent delegate difficult coding work to stronger external CLIs.
-- Route work by capability fit, such as keeping backend architecture with Codex while using Gemini CLI for frontend/UI-oriented implementation and aesthetic review.
+- Route work by strength profile and capability fit, such as keeping backend architecture with Codex while using Gemini CLI for frontend/UI-oriented implementation and aesthetic review.
 
 ## Install
 

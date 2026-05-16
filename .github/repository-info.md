@@ -16,11 +16,11 @@ Agent skills for delegating bounded coding tasks to manually authenticated exter
 
 English:
 
-External CLI subagent skills for bounded, manually authenticated coding delegation. Vendor-neutral entrypoint plus Gemini CLI adapter, with capability-fit routing, isolation, concurrency, logging, and main-agent verification rules.
+External CLI subagent skills for bounded, manually authenticated coding delegation. Vendor-neutral entrypoint plus Gemini CLI adapter, with strength profiles, capability-fit routing, isolation, concurrency, logging, and main-agent verification rules.
 
 中文：
 
-用于外派受限编码任务的外部 CLI 子代理 Skills。提供厂商无关主入口和 Gemini CLI 适配器，支持按能力适配路由任务，并明确隔离、并发、日志、手动鉴权与主代理验收边界。
+用于外派受限编码任务的外部 CLI 子代理 Skills。提供厂商无关主入口和 Gemini CLI 适配器，包含擅长任务描述，支持按能力适配路由任务，并明确隔离、并发、日志、手动鉴权与主代理验收边界。
 
 ## Topics / 主题
 
