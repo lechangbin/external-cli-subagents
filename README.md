@@ -6,12 +6,20 @@ Agent skills for exposing manually authenticated external coding CLIs as control
 
 The main skill, `external-cli-subagents`, is a vendor-neutral entrypoint. Vendor-specific adapters live beside it and share the same handoff, logging, concurrency, and verification contract. The first implemented adapter is `gemini-cli-subagent` for the local `gemini` command.
 
+Beyond cost control, this package supports capability-complement routing: assign bounded work to the CLI/model that fits it best. For example, a main Codex session may keep backend architecture and integration decisions while delegating frontend polish or visual review to Gemini CLI, then independently verify the result.
+
 ## Skills
 
 | Skill | Purpose |
 | --- | --- |
 | `external-cli-subagents` | Shared workflow for selecting a CLI adapter, preparing isolated work, handing off a bounded task, and triaging results |
 | `gemini-cli-subagent` | Gemini CLI adapter with manual readiness checks, command templates, concurrency notes, and failure handling |
+
+## Use Cases
+
+- Reduce high-end main-agent context use for large, independent, verifiable tasks.
+- Let a lower-cost main agent delegate difficult coding work to stronger external CLIs.
+- Route work by capability fit, such as keeping backend architecture with Codex while using Gemini CLI for frontend/UI-oriented implementation and aesthetic review.
 
 ## Install
 
@@ -37,6 +45,7 @@ These skills also do not automate authentication. Users should install and log i
 - Keep write scopes explicit and non-overlapping, especially for concurrent child runs.
 - Do not merge or accept child work based only on the child agent's success message.
 - The main agent must inspect results and run fresh verification before accepting work.
+- Do not let capability-fit assumptions replace project tests, screenshots, diffs, or code review.
 
 ## Gemini CLI Notes
 
@@ -70,7 +79,7 @@ gemini
 Suggested repository social/about summary:
 
 ```text
-External CLI subagent skills for bounded, manually authenticated coding delegation. Vendor-neutral entrypoint plus Gemini CLI adapter, with isolation, concurrency, logging, and main-agent verification rules.
+External CLI subagent skills for bounded, manually authenticated coding delegation. Vendor-neutral entrypoint plus Gemini CLI adapter, with capability-fit routing, isolation, concurrency, logging, and main-agent verification rules.
 ```
 
 ## Validation

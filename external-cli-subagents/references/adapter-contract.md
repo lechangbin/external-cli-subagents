@@ -9,20 +9,37 @@ Adapter skill name: `<vendor>-cli-subagent`
 Frontmatter description must say when to use the adapter and must include:
 
 - The local CLI command name.
+- Capability-fit signals for routing tasks to this adapter.
 - Manual authentication requirement.
 - That API calls and credential automation are out of scope.
 
 ## Required Sections
 
 1. Overview
-2. Manual Readiness
-3. Command Templates
-4. Handoff Prompt
-5. Concurrency and Isolation
-6. Output Contract
-7. Monitoring and Logs
-8. Failure Handling
-9. Extension Notes
+2. Capability Fit
+3. Manual Readiness
+4. Command Templates
+5. Handoff Prompt
+6. Concurrency and Isolation
+7. Output Contract
+8. Monitoring and Logs
+9. Failure Handling
+10. Extension Notes
+
+## Capability Fit
+
+Each adapter must declare where it tends to be useful and where it should not be trusted without extra care.
+
+Include:
+
+| Field | Meaning |
+| --- | --- |
+| `best_fit` | Task shapes this CLI/model is especially useful for |
+| `weak_fit` | Task shapes that should stay with the main agent or another adapter |
+| `validation_signals` | Tests, screenshots, diffs, benchmarks, or review checks needed before accepting work |
+| `routing_notes` | Comparative notes such as "stronger for frontend polish" or "better for backend architecture" |
+
+These notes help the main agent route by capability complementarity, but they do not decide routing on their own. The main agent or existing delegation workflow still chooses the child.
 
 ## Unified Input
 
@@ -37,6 +54,7 @@ Adapters accept this conceptual input from `external-cli-subagents`:
 | `verification` | Commands or manual checks the child should attempt |
 | `output_log` | Path where output should be saved when practical |
 | `concurrency` | Whether this child may run in parallel and what isolation is required |
+| `capability_fit` | Why this adapter is suitable for the selected task, if relevant |
 
 ## Handoff Template Requirements
 
@@ -78,6 +96,7 @@ The main agent still verifies independently.
 - Do not run in the main worktree when a disposable worktree or branch is available.
 - Do not run concurrent file-editing tasks in the same writable scope.
 - Do not merge child work based only on a success message.
+- Do not let capability-fit notes override evidence from tests, screenshots, diffs, or project conventions.
 
 ## Adding a Vendor
 

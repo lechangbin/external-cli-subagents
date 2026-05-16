@@ -6,12 +6,20 @@
 
 主 skill `external-cli-subagents` 是厂商无关入口。不同厂商 CLI 通过独立 adapter skill 接入，并共享同一套任务外派、日志、并发、隔离和主代理验收契约。当前已实现的 adapter 是面向本地 `gemini` 命令的 `gemini-cli-subagent`。
 
+除了节省主代理上下文成本，本仓库也支持“能力互补路由”：把边界清晰的任务分配给更适合的 CLI/模型。例如主 Codex 会话保留后端架构和集成判断，把前端润色、视觉审美或 UI 复核外派给 Gemini CLI，然后由主代理独立验收结果。
+
 ## Skills
 
 | Skill | 用途 |
 | --- | --- |
 | `external-cli-subagents` | 共享入口：选择 CLI adapter、准备隔离工作区、外派边界清晰的任务、接收结果并决定验收/返工/丢弃 |
 | `gemini-cli-subagent` | Gemini CLI adapter：手动就绪检查、命令模板、并发说明、日志约定和失败处理 |
+
+## 使用场景
+
+- 把大型、独立、可验证任务外派出去，减少高级主代理的上下文占用。
+- 让低成本主代理把困难编码任务委托给更强的外部 CLI。
+- 按能力适配路由任务，例如 Codex 负责后端架构和集成判断，Gemini CLI 负责前端/UI 实现、文案、视觉润色或审美复核。
 
 ## 安装
 
@@ -39,6 +47,7 @@ npx skills add lechangbin/external-cli-subagents --skill gemini-cli-subagent
 - 写入范围必须明确，尤其是并发子代理运行时必须避免重叠写入。
 - 不因为子代理自称成功就合并或接受结果。
 - 主代理必须检查 diff/文件结果，并重新运行验证命令后再接受工作。
+- 不能让“某模型更擅长某类任务”的经验替代测试、截图、diff 或代码审查证据。
 
 ## Gemini CLI 说明
 
@@ -68,7 +77,7 @@ agent-orchestration
 概要提示：
 
 ```text
-用于外派受限编码任务的外部 CLI 子代理 Skills。提供厂商无关主入口和 Gemini CLI 适配器，明确隔离、并发、日志、手动鉴权与主代理验收边界。
+用于外派受限编码任务的外部 CLI 子代理 Skills。提供厂商无关主入口和 Gemini CLI 适配器，支持按能力适配路由任务，并明确隔离、并发、日志、手动鉴权与主代理验收边界。
 ```
 
 ## 验证

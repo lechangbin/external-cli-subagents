@@ -48,6 +48,7 @@ Prefer targeted context over whole-repository prompts:
 - Independent bug fixes in a disposable worktree.
 - Second-opinion review of a diff or plan.
 - Boilerplate or mechanical edits with precise acceptance checks.
+- Frontend/UI implementation, copy, visual polish, and aesthetic review when given screenshots or concrete design constraints.
 
 ## Concurrency Notes
 
@@ -64,3 +65,4 @@ Observed on Windows with Gemini CLI `0.42.0`:
 - Tasks requiring hidden credentials or account setup.
 - Live production changes.
 - Broad refactors without a written scope.
+- Backend or security-sensitive design where project-specific constraints dominate model style preferences.
