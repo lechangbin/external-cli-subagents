@@ -1,5 +1,7 @@
 # Security Policy
 
+[中文安全说明](SECURITY.zh-CN.md)
+
 This repository intentionally avoids automatic credential handling.
 
 ## Supported Boundary

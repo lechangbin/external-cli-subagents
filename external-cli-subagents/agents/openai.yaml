@@ -1,4 +1,4 @@
 interface:
-  display_name: "External CLI Subagents"
-  short_description: "Expose external coding CLIs as manually controlled subagents."
-  default_prompt: "Use $external-cli-subagents to run a manually authenticated external CLI subagent workflow."
+  display_name: "外部 CLI 子代理"
+  short_description: "将外部编码 CLI 暴露为手动鉴权的受控子代理。"
+  default_prompt: "使用 $external-cli-subagents 运行一个手动鉴权的外部 CLI 子代理流程。"

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Gemini CLI Subagent"
-  short_description: "Run Gemini CLI as a manually authenticated external subagent."
-  default_prompt: "Use $gemini-cli-subagent to hand off a bounded task to Gemini CLI."
+  display_name: "Gemini CLI 子代理"
+  short_description: "通过本地 Gemini CLI 外派受限编码任务。"
+  default_prompt: "使用 $gemini-cli-subagent 将一个边界清晰的任务外派给 Gemini CLI。"

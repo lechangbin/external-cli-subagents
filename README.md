@@ -1,5 +1,7 @@
 # external-cli-subagents
 
+[中文文档](README.zh-CN.md)
+
 Agent skills for exposing manually authenticated external coding CLIs as controlled subagents.
 
 The main skill, `external-cli-subagents`, is a vendor-neutral entrypoint. Vendor-specific adapters live beside it and share the same handoff, logging, concurrency, and verification contract. The first implemented adapter is `gemini-cli-subagent` for the local `gemini` command.
@@ -48,6 +50,10 @@ Suggested GitHub description:
 
 > Agent skills for delegating bounded coding tasks to manually authenticated external CLI subagents, starting with Gemini CLI.
 
+Suggested Chinese description:
+
+> 将已手动鉴权的外部 CLI 编码智能体暴露为受控子代理的 Agent Skills，当前支持 Gemini CLI。
+
 Suggested topics:
 
 ```text
@@ -58,6 +64,13 @@ subagents
 cli-agents
 external-tools
 agent-orchestration
+gemini
+```
+
+Suggested repository social/about summary:
+
+```text
+External CLI subagent skills for bounded, manually authenticated coding delegation. Vendor-neutral entrypoint plus Gemini CLI adapter, with isolation, concurrency, logging, and main-agent verification rules.
 ```
 
 ## Validation
