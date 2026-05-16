@@ -1,0 +1,4 @@
+interface:
+  display_name: "External CLI Subagents"
+  short_description: "Expose external coding CLIs as manually controlled subagents."
+  default_prompt: "Use $external-cli-subagents to run a manually authenticated external CLI subagent workflow."

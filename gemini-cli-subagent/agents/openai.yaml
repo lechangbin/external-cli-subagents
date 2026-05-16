@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gemini CLI Subagent"
+  short_description: "Run Gemini CLI as a manually authenticated external subagent."
+  default_prompt: "Use $gemini-cli-subagent to hand off a bounded task to Gemini CLI."
